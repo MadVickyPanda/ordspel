@@ -1,0 +1,27 @@
+{
+  "name": "ordspel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+  "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MadVickyPanda/ordspel.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/MadVickyPanda/ordspel/issues"
+  },
+  "homepage": "https://github.com/MadVickyPanda/ordspel#readme",
+  "devDependencies": {
+    "jest": "^30.3.0"
+  }
+}
