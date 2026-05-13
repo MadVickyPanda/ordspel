@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <title>Highscores</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #121213;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      padding-top: 50px;
+    }
+
+    .container {
+      width: 460px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+
+    .nav {
+      margin-bottom: 20px;
+    }
+
+    .nav a {
+      color: #aaa;
+      text-decoration: none;
+      margin: 0 8px;
+      font-size: 14px;
+    }
+
+    .nav a:hover {
+      color: white;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #1a1a1b;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    th {
+      background: #2a2a2b;
+      color: #bbb;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 12px;
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #2f2f2f;
+      font-size: 14px;
+    }
+
+    tr:hover {
+      background: #2a2a2b;
+    }
+
+    .rank {
+      font-weight: bold;
+      width: 40px;
+    }
+
+    .gold { color: #ffd700; }
+    .silver { color: #c0c0c0; }
+    .bronze { color: #cd7f32; }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 14px;
+      background: #1f1f1f;
+      border: 1px solid #333;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+
+    .btn:hover {
+      background: #2a2a2a;
+    }
+
+    .subtitle {
+      color: #888;
+      font-size: 13px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>🏆 Highscores</h1>
+    <div class="subtitle">Bästa spelarna i Wordle</div>
+
+    <div class="nav">
+      <a href="/">Spel</a> |
+      <a href="/about">About</a>
+    </div>
+
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Namn</th>
+        <th>Tid</th>
+        <th>Gissningar</th>
+      </tr>
+
+      <% scores.forEach((s, i) => { 
+          let medal = '';
+          if (i === 0) medal = 'gold';
+          else if (i === 1) medal = 'silver';
+          else if (i === 2) medal = 'bronze';
+      %>
+
+        <tr>
+          <td class="rank <%= medal %>">
+            <% if (i === 0) { %>🥇<% } %>
+            <% if (i === 1) { %>🥈<% } %>
+            <% if (i === 2) { %>🥉<% } %>
+            <%= i + 1 %>
+          </td>
+
+          <td><%= s.name %></td>
+          <td><%= s.time %></td>
+          <td><%= s.guesses %></td>
+        </tr>
+
+      <% }) %>
+    </table>
+
+    <a class="btn" href="/">← Till spelet</a>
+
+  </div>
+</body>
+</html>

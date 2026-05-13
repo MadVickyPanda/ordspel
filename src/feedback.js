@@ -1,11 +1,11 @@
 function getFeedback(guess, answer) {
   const result = [];
-  const answerLetters = answer.split('');
-  const guessLetters = guess.split('');
+  const answerLetters = answer.toUpperCase().split('');
+  const guessLetters = guess.toUpperCase().split('');
 
-  // Steg 1: markera correct
-  const taken = Array(answer.length).fill(false);
+  const taken = Array(answerLetters.length).fill(false);
 
+  // correct
   for (let i = 0; i < guessLetters.length; i++) {
     if (guessLetters[i] === answerLetters[i]) {
       result[i] = { letter: guessLetters[i], result: 'correct' };
@@ -15,7 +15,7 @@ function getFeedback(guess, answer) {
     }
   }
 
-  // Steg 2: markera misplaced / incorrect
+  // misplaced / incorrect
   for (let i = 0; i < guessLetters.length; i++) {
     if (result[i]) continue;
 
