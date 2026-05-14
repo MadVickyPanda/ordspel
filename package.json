@@ -1,33 +1,59 @@
 {
   "name": "ordspel",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Wordle-inspired fullstack game with highscores",
+  "main": "dist/server.js",
+  "type": "commonjs",
+
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && node dist/server.js",
+    "test": "jest"
+  },
+
   "directories": {
     "test": "test"
   },
-  "scripts": {
-    "start": "node src/server.js",
-    "test": "jest"
-  },
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MadVickyPanda/ordspel.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+
   "bugs": {
     "url": "https://github.com/MadVickyPanda/ordspel/issues"
   },
+
   "homepage": "https://github.com/MadVickyPanda/ordspel#readme",
-  "devDependencies": {
-    "jest": "^30.3.0"
-  },
+
+  "keywords": [
+    "wordle",
+    "react",
+    "express",
+    "typescript",
+    "sqlite",
+    "fullstack"
+  ],
+
+  "author": "",
+  "license": "ISC",
+
   "dependencies": {
     "ejs": "^5.0.2",
     "express": "^5.2.1",
     "sqlite3": "^6.0.1"
+  },
+
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.7.0",
+    "@types/supertest": "^7.2.0",
+
+    "jest": "^30.4.2",
+    "supertest": "^7.2.2",
+    "ts-jest": "^29.4.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
   }
 }

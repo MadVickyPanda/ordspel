@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="sv">
+
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="/style.css">
   <title>Highscores</title>
 
   <style>
@@ -16,28 +18,46 @@
     }
 
     .container {
-      width: 460px;
+      width: 700px;
       text-align: center;
     }
 
-    h1 {
-      margin-bottom: 10px;
-      letter-spacing: 2px;
-    }
-
+    /*NAVBAR*/
     .nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
       margin-bottom: 20px;
     }
 
     .nav a {
+      background: transparent;
+      border: none;
       color: #aaa;
-      text-decoration: none;
-      margin: 0 8px;
       font-size: 14px;
+      cursor: pointer;
+      padding: 6px 10px;
+      text-decoration: none;
+      transition: 0.2s;
     }
 
     .nav a:hover {
       color: white;
+    }
+
+    .nav a.active {
+      color: white;
+      border-bottom: 2px solid white;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      color: #888;
+      margin-bottom: 20px;
+      font-size: 14px;
     }
 
     table {
@@ -46,22 +66,20 @@
       background: #1a1a1b;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
     }
 
     th {
       background: #2a2a2b;
-      color: #bbb;
+      padding: 12px;
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 1px;
-      padding: 12px;
+      color: #bbb;
     }
 
     td {
       padding: 12px;
       border-bottom: 1px solid #2f2f2f;
-      font-size: 14px;
     }
 
     tr:hover {
@@ -70,32 +88,23 @@
 
     .rank {
       font-weight: bold;
-      width: 40px;
+      width: 60px;
     }
 
-    .gold { color: #ffd700; }
-    .silver { color: #c0c0c0; }
-    .bronze { color: #cd7f32; }
-
-    .btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 14px;
-      background: #1f1f1f;
-      border: 1px solid #333;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
+    .gold {
+      color: #ffd700;
     }
 
-    .btn:hover {
-      background: #2a2a2a;
+    .silver {
+      color: #c0c0c0;
     }
 
-    .subtitle {
-      color: #888;
-      font-size: 13px;
-      margin-bottom: 15px;
+    .bronze {
+      color: #cd7f32;
+    }
+
+    .badge {
+      font-size: 18px;
     }
   </style>
 </head>
@@ -103,13 +112,15 @@
 <body>
   <div class="container">
 
-    <h1>🏆 Highscores</h1>
-    <div class="subtitle">Bästa spelarna i Wordle</div>
-
+    <!-- NAVBAR -->
     <div class="nav">
-      <a href="/">Spel</a> |
-      <a href="/about">About</a>
+      <a href="/" class="<%= activePage === 'game' ? 'active' : '' %>">Spel</a>
+      <a href="/about" class="<%= activePage === 'about' ? 'active' : '' %>">Om</a>
+      <a href="/highscores" class="<%= activePage === 'highscores' ? 'active' : '' %>">Highscores</a>
     </div>
+
+    <h1>🏆 Highscores</h1>
+    <div class="subtitle">Bästa Wordle-spelarna</div>
 
     <table>
       <tr>
@@ -117,33 +128,52 @@
         <th>Namn</th>
         <th>Tid</th>
         <th>Gissningar</th>
+        <th>Svårighet</th>
       </tr>
 
-      <% scores.forEach((s, i) => { 
-          let medal = '';
-          if (i === 0) medal = 'gold';
-          else if (i === 1) medal = 'silver';
-          else if (i === 2) medal = 'bronze';
-      %>
+      <% scores.forEach((s, i)=> {
+        let medal = '';
+        let emoji = '';
+
+        if (i === 0) {
+        medal = 'gold';
+        emoji = '🥇';
+        } else if (i === 1) {
+        medal = 'silver';
+        emoji = '🥈';
+        } else if (i === 2) {
+        medal = 'bronze';
+        emoji = '🥉';
+        }
+        %>
 
         <tr>
           <td class="rank <%= medal %>">
-            <% if (i === 0) { %>🥇<% } %>
-            <% if (i === 1) { %>🥈<% } %>
-            <% if (i === 2) { %>🥉<% } %>
+            <span class="badge">
+              <%= emoji %>
+            </span>
             <%= i + 1 %>
           </td>
 
-          <td><%= s.name %></td>
-          <td><%= s.time %></td>
-          <td><%= s.guesses %></td>
+          <td>
+            <%= s.name %>
+          </td>
+          <td>
+            <td><%= (s.time / 1000).toFixed(1) %>s</td>
+          </td>
+          <td>
+            <%= s.guesses %>
+          </td>
+          <td>
+            <%= s.length %> bokstäver
+          </td>
         </tr>
 
-      <% }) %>
-    </table>
+        <% }) %>
 
-    <a class="btn" href="/">← Till spelet</a>
+    </table>
 
   </div>
 </body>
+
 </html>

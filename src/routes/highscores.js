@@ -3,15 +3,26 @@ const router = express.Router();
 const db = require('../database');
 
 router.get('/', (req, res) => {
-  db.all(
-    `SELECT * FROM highscores ORDER BY time ASC`,
-    [],
-    (err, rows) => {
-      if (err) return res.status(500).send('DB error');
+  const length = req.query.length;
 
-      res.render('highscores', { scores: rows });
-    }
-  );
+  let sql = 'SELECT * FROM highscores';
+  let params = [];
+
+  if (length) {
+    sql += ' WHERE length = ?';
+    params.push(length);
+  }
+
+  sql += ' ORDER BY time ASC';
+
+  db.all(sql, params, (err, rows) => {
+    if (err) return res.status(500).send('DB error');
+
+    res.render('highscores', {
+      scores: rows,
+      selectedLength: length
+    });
+  });
 });
 
 module.exports = router;

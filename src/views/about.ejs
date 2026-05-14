@@ -1,12 +1,127 @@
-<h1>Om projektet</h1>
+<!DOCTYPE html>
+<html lang="sv">
 
-<p>Wordle-spel byggt i Node.js och React.</p>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/style.css">
+  <title>Om spelet</title>
 
-<ul>
-  <li>Slumpade svenska ord</li>
-  <li>Feedback (grön/gul/röd)</li>
-  <li>Highscore sparas i SQLite</li>
-</ul>
+  <style>
+    body {
+      margin: 0;
+      background: #121213;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      padding-top: 50px;
+    }
 
-<a href="/">Spela</a>
-<a href="/highscores">Highscores</a>
+    .container {
+      width: 700px;
+      text-align: center;
+    }
+
+    /*NAVBAR*/
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .nav a {
+      background: transparent;
+      border: none;
+      color: #aaa;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 6px 10px;
+      text-decoration: none;
+      transition: 0.2s;
+      border-radius: 6px;
+    }
+
+    .nav a:hover {
+      color: white;
+    }
+
+    .active {
+      color: white;
+      border-bottom: 2px solid white;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .box {
+      background: #1a1a1b;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: left;
+      line-height: 1.6;
+      margin-top: 20px;
+    }
+
+    .highlight {
+      color: #538d4e;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- NAVBAR -->
+    <div class="nav">
+      <a href="/" class="<%= activePage === 'game' ? 'active' : '' %>">Spel</a>
+      <a href="/about" class="<%= activePage === 'about' ? 'active' : '' %>">Om</a>
+      <a href="/highscores" class="<%= activePage === 'highscores' ? 'active' : '' %>">Highscores</a>
+    </div>
+
+    <h1>ℹ️ Om spelet</h1>
+
+    <div class="box">
+      <p>
+        Detta är ett <span class="highlight">Wordle-inspirerat spel</span> byggt som en fullstack-applikation.
+      </p>
+
+      <p>
+        Spelet går ut på att gissa ett hemligt ord genom att skriva in olika förslag.
+        Efter varje gissning får du feedback:
+      </p>
+
+      <ul>
+        <li>🟩 Grön = rätt bokstav på rätt plats</li>
+        <li>🟨 Gul = rätt bokstav på fel plats</li>
+        <li>⬛ Grå = bokstaven finns inte i ordet</li>
+      </ul>
+
+      <p>
+        Du kan välja ordets längd (3–8 bokstäver).
+      </p>
+
+      <p>
+        Du kan också aktivera <span class="highlight">“Endast unika bokstäver”</span>,
+        vilket betyder att ordet inte får innehålla upprepade bokstäver.
+      </p>
+
+      <p>
+        Backend hanterar:
+      </p>
+
+      <ul>
+        <li>Slumpning av ord</li>
+        <li>Validering av gissningar</li>
+        <li>Beräkning av tid</li>
+        <li>Highscore-databas</li>
+      </ul>
+
+    </div>
+
+  </div>
+</body>
+
+</html>
